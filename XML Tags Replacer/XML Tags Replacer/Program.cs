@@ -19,11 +19,10 @@
 
     string[] xmlFiles = Directory.GetFiles(diretorioEntrada, "*.xml");
 
-    Console.WriteLine("Começando processamento de arquivos.");
+    Util.LogaMensagem("Começando processamento de arquivos.");    
 
     foreach (string xmlFilePath in xmlFiles)
     {
-
         string xmlContent = File.ReadAllText(xmlFilePath);
 
         if (xmlContent.Contains(elementoASerTrocado))
@@ -35,14 +34,15 @@
             File.WriteAllText(destinationFilePath, xmlContent);
 
         }
-        else
+        
+        else        
         {
             elementosNaoEncontrados.Add(xmlFilePath);
         }
     }
-    Console.WriteLine($"Operação terminada. Total de registros sem elementos encontrados: {elementosNaoEncontrados.Count}.");
+    Util.LogaMensagem($"Operação terminada. Total de registros sem elementos encontrados: {elementosNaoEncontrados.Count}.");
 }
 catch (Exception ex)
 {
-    Console.WriteLine("Erro inesperado: " + ex.Message);
+    Util.LogaMensagem("Erro inesperado: " + ex.Message);
 }
