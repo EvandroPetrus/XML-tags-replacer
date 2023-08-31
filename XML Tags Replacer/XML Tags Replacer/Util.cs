@@ -1,7 +1,14 @@
-﻿    public static class Util
+﻿public static class Util
+{
+    public static void LogaMensagem(string msg)
     {
-        public static void LogaMensagem(string msg)
+        Console.WriteLine($"{DateTime.Now:HH:mm:ss} > {msg}");
+    }
+    public static void GaranteExistenciaDiretorio(string outputDirectory)
+    {
+        if (!Directory.Exists(outputDirectory))
         {
-            Console.WriteLine($"{DateTime.Now:HH:mm:ss} > {msg}");
+            Directory.CreateDirectory(outputDirectory);
         }
     }
+}
