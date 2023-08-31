@@ -1,5 +1,4 @@
-﻿
-    public static class Util
+﻿    public static class Util
     {
         public static void LogaMensagem(string msg)
         {

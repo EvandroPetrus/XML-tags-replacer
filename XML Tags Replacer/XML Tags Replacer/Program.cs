@@ -1,8 +1,11 @@
-﻿try
+﻿using System.Diagnostics;
+
+try
 {
-    string diretorioBase = @"C:\Users\infis001091\Desktop\Chamado 16851";
+    string diretorioBase = @"C:\Users\infis001091\Desktop\Chamado 16852";
     string diretorioEntrada = Path.Combine(diretorioBase, "input");
     string diretorioSaida = Path.Combine(diretorioBase, "output");
+
     string elementoASerTrocado = "<nfeProc versao=\"4.00\">";
     string elementoASerInserido = "<nfeProc xmlns=\"http://www.portalfiscal.inf.br/nfe\" versao=\"4.00\">";
     List<string> elementosNaoEncontrados = new();
@@ -20,6 +23,7 @@
     string[] xmlFiles = Directory.GetFiles(diretorioEntrada, "*.xml");
 
     Util.LogaMensagem("Começando processamento de arquivos.");    
+    Stopwatch sw = Stopwatch.StartNew();
 
     foreach (string xmlFilePath in xmlFiles)
     {
@@ -32,7 +36,6 @@
             string destinationFilePath = Path.Combine(diretorioSaida, Path.GetFileName(xmlFilePath));
 
             File.WriteAllText(destinationFilePath, xmlContent);
-
         }
         
         else        
@@ -40,7 +43,8 @@
             elementosNaoEncontrados.Add(xmlFilePath);
         }
     }
-    Util.LogaMensagem($"Operação terminada. Total de registros sem elementos encontrados: {elementosNaoEncontrados.Count}.");
+    sw.Stop();
+    Util.LogaMensagem($"Operação terminada em {sw.Elapsed.TotalSeconds} segundos. Total de registros sem o elemento '{elementoASerTrocado}' encontrados: {elementosNaoEncontrados.Count}.");
 }
 catch (Exception ex)
 {
