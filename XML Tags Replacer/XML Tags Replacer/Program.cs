@@ -1,3 +1,3 @@
 ﻿string diretorioBase = @"C:\Users\infis001091\Desktop\Chamado 16852";
 
-XMLProcessor.ProcessFiles(diretorioBase);
+ProcessadorXMLs.ProcessaArquivos(diretorioBase);
